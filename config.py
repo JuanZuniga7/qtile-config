@@ -57,18 +57,8 @@ for vt in range(1, 8):
     )
 
 groups = [
-    Group(name=name, label=label, persist=persist)
-    for name, label, persist in [
-        ("1", "", True),
-        ("2", "", False),
-        ("3", "", False),
-        ("4", "", False),
-        ("5", "", False),
-        ("6", "", True),
-        ("7", "", False),
-        ("8", "", True),
-        ("9", "", True),
-    ]
+    Group(name=name, label="")
+    for name in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 ]
 
 for i in groups:
@@ -90,8 +80,8 @@ for i in groups:
     )
 
 layouts = [
-    layout.Max(),
-    # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    #layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Max(margin=10),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -117,26 +107,21 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Image(filename="~/.config/qtile/assets/logo.png", scale=True,
-                             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("rofi -show drun")}),
+                widget.Image(filename="~/.config/qtile/assets/logo.png", scale=True),
+                widget.Spacer(length=10),
+                widget.GroupBox(fontsize=20, active="#38bdf8", background=None, borderwidth=1, rounded=True,
+                                disable_drag=True, center_aligned=True, highlight_method="text",
+                                padding_x=5, spacing=1, inactive="#FFFFFF"),
                 widget.Spacer(),
-                
-                widget.Spacer(),
-                widget.GroupBox(fontsize=16, active="#ffffff", background="#1a8cff", borderwidth=1,
-                                center_aligned=True, disable_grab=True, rounded=True, highlight_method="line",
-                                highlight_color=["#66b3ff", "#66b3ff"], margin_x=6,
-                                margin_y=3, padding=5, spacing=2, inactive="#ffffff"),
-                widget.Spacer(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p", font="Iosevka Nerd Font", timezone="America/Bogota"),
                 widget.Spacer(length=10),
                 widget.Image(filename="~/.config/qtile/assets/poweroff.png", scale=True,
                              mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("poweroff")}),
             ],
-            32,
+            24,
             background="#00000000",
-            border_width=[0, 10, 2, 30],  # Draw top and bottom borders
+            border_width=[0, 20, 0, 20],  # Draw top and bottom borders
             border_color="#00000000",
-            gap=10,
         ),
     ),
 ]
